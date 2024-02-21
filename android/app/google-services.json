@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "350099279470",
+    "project_id": "fir-firestore-57c0d",
+    "storage_bucket": "fir-firestore-57c0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350099279470:android:023ac587ca13a519bfa07f",
+        "android_client_info": {
+          "package_name": "com.example.firestore_note"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBESbTr1QOunJGcWkslt---2JZsoAUUJSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
