@@ -9,14 +9,20 @@ class FireStoreService {
     await db.collection(pathA).add(data);
   }
 
-  static Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> readAllData() async {
-    await db.collection(pathA).get().then((value) {
-      for (var doc in value.docs) {
-        documents.add(doc);
-      }
-    });
+static Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> readAllData() async {
+  try {
+    final querySnapshot = await db.collection(pathA).orderBy('content', descending: true).get();
+    documents.clear(); // Clear existing data before adding new documents
+    for (var doc in querySnapshot.docs) {
+      documents.add(doc);
+    }
     return documents;
+  } catch (e) {
+    print('Error reading data: $e');
+    return []; // Return an empty list in case of error
   }
+}
+
 
   static Future<void> delete({required String id}) async {
     await db.collection(pathA).doc(id).delete();

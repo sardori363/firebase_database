@@ -81,12 +81,16 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   IconButton(
                                     onPressed: () async {
-                                      if (titleController.text.isNotEmpty && contentController.text.isNotEmpty) {
-                                        await FireStoreService.update(id: document.id, data: {
-                                          'title':titleController.text,
-                                          'content':contentController.text
-                                        });
-                                        await FireStoreService.readAllData().then((value) {
+                                      if (titleController.text.isNotEmpty &&
+                                          contentController.text.isNotEmpty) {
+                                        await FireStoreService.update(
+                                            id: document.id,
+                                            data: {
+                                              'title': titleController.text,
+                                              'content': contentController.text
+                                            });
+                                        await FireStoreService.readAllData()
+                                            .then((value) {
                                           Navigator.pop(context);
                                         });
                                         setState(() {});
