@@ -1,3 +1,4 @@
+import 'package:firestore_note/model/post_model.dart';
 import 'package:firestore_note/services/firestore_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,19 +16,40 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    FireStoreService.readAllData().then((value) {
-      setState(() {
-        isLoading = true;
-      });
-    });
     super.initState();
+    _fetchData();
+  }
+
+  _fetchData() async {
+    await FireStoreService.readAllData();
+    setState(() {
+      isLoading = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController contentController = TextEditingController();
+    TextEditingController searchController = TextEditingController();
+
+    Future<void> create() async {
+      PostModel postModel = PostModel(
+          title: "aaaaaaaaaaaa",
+          content: "bbbbbbbbbbbbbb");
+      await FireStoreService.storeData(data: postModel.toJson(), path: );
+      print("object");
+    }
+
     return Scaffold(
+      appBar: AppBar(
+        title: TextField(
+          controller: searchController,
+          onChanged: (value) async{
+            await FireStoreService.search('$value');
+          },
+        ),
+      ),
       body: isLoading
           ? StreamBuilder(
               stream: FireStoreService.db
@@ -133,8 +155,9 @@ class _HomePageState extends State<HomePage> {
             "content": "PDP University",
             "dateTime": DateTime.now(),
           };
-
-          await FireStoreService.storeData(data: note);
+       print(1);
+          await create("agh");
+          print(1);
           setState(() {});
         },
         child: Icon(Icons.add),
